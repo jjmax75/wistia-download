@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jjmax75/wistia-download/issues"
   },
-  "homepage": "https://github.com/jjmax75/wistia-download#readme"
+  "homepage": "https://github.com/jjmax75/wistia-download#readme",
+  "dependencies": {
+    "request": "2.79.0"
+  }
 }
