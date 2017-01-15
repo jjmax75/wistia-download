@@ -1,0 +1,19 @@
+{
+  "name": "wistia-download",
+  "version": "1.0.0",
+  "description": "Command line tool to download video from Wistia",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjmax75/wistia-download.git"
+  },
+  "author": "John Behan <behanj@gmail.com> (http://boxitoff.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjmax75/wistia-download/issues"
+  },
+  "homepage": "https://github.com/jjmax75/wistia-download#readme"
+}
