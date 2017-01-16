@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jjmax75/wistia-download#readme",
   "dependencies": {
+    "dotenv": "4.0.0",
     "request": "2.79.0",
     "request-progress": "3.0.0"
   }

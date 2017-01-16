@@ -1,3 +1,5 @@
+'use strict';
+
 const request = require( 'request' );
 const fs = require( 'fs' );
 const progress = require( 'request-progress' );
@@ -8,7 +10,7 @@ const headers = {
   'Referer': 'http://fast.wistia.net/embed/iframe/' + videoID
 };
 
-var options = {
+const options = {
   url: 'http://fast.wistia.net/embed/medias/' + videoID + '.json',
   headers: headers
 };
@@ -31,14 +33,17 @@ function parseVideoURL( data ){
     return element.type === 'hd_mp4_video';
   });
 
-  progress(request( video.url, {} )
+  progress( request( video.url ), {
+    throttle: 2000,
+    delay: 1000
+  })
     .on( 'progress', ( state) => {
       console.log(
-        'progress:', state.percent * 100 + '% - ('
-        + state.size.transferred + '/' + state.size.total + 'bytes at '
-        + state.speed + 'bytes/sec) - '
-        + state.time.elapsed + 'seconds elapsed, '
-        + state.time.remaining + 'seconds remaining'
+        'progress:', ( state.percent * 100 ).toFixed( 2 ) + '% - ('
+        + ( state.size.transferred / 1000 ).toFixed( 2 ) + '/' + ( state.size.total / 1000 ).toFixed( 2 ) + 'KB at '
+        + ( state.speed / 1000).toFixed( 2 ) + 'KB/sec) - '
+        + ( state.time.elapsed ).toFixed( 2 ) + 'seconds elapsed, '
+        + ( state.time.remaining ).toFixed( 2 ) + 'seconds remaining'
       );
     })
     .on( 'error', ( err ) => {
@@ -47,5 +52,5 @@ function parseVideoURL( data ){
     .on( 'end', () => {
       console.log( 'video downloaded and saved' );
     })
-    .pipe( fs.createWriteStream( './videos/' + videoID + '.' + video.ext )));
+    .pipe( fs.createWriteStream( process.env.FOLDER + '/' + videoID + '.' + video.ext ));
 }
